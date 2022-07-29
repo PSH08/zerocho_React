@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import React from 'react'
+import Try from './TryClass';
+
 function getNumbers() { // 숫자 네 개를 겹치지 않고 랜덤하게 뽑는 함수
   const candidate = [1,2,3,4,5,6,7,8,9];
   const array = [];
@@ -17,7 +19,7 @@ const NumberBaseball = () => {
   const [tries, setTries] = useState([]);
 
   const onSubmitForm = (e) => {
-    const {value, tries, result , answer} = this.state;
+    // const {value, tries, result , answer} = this.state;
     e.preventDefault();
     if(value === answer.join('')) { 
       setResult('홈런')
@@ -62,7 +64,7 @@ const NumberBaseball = () => {
       </form>
       <div>시도: {tries.length}</div>
       <ul>
-        {this.state.tries.map((v,i) => {
+        {tries.map((v,i) => {
           return (
             <Try key={`${i + 1}차 시도 : `} tryInfo={v} />
           )
