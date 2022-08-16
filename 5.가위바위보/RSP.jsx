@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useRef, useState, useEffect } from 'react'
 
 const rspCoords = {
@@ -18,6 +18,29 @@ const computerChoice = (imgCoord) => {
   })[0];
 };
 
+//                     result, imgCoord, score
+// componentDidMount
+// componentDidUpdate
+// componentDidUnmount
+
+// componentDidMount() {
+//  this.setState({
+// imgCoord: 3,
+// score: 1,
+// result: 2,
+//}) 
+//}
+
+// useEffect(() => {
+// setImgCoord();
+// setScore();  
+//},[imgCoord,score])
+// useEffect(() => {
+// setRsult();
+//}, [result])
+
+
+
 const RSP = () => {
   const [result, setResult] = useState('');
   const [imgCoord, setImgCoord] = useState(rspCoords.바위);
@@ -25,11 +48,13 @@ const RSP = () => {
   const interval = useRef()
   
   useEffect(() => { // componentDidMount, componentDidUpdate 역할 (1대1 대응은 아님)
+    console.log('다시 실행')
     interval.current = setInterval(changeHand, 100)
     return () => { // componentWillUmmount 역할
+      console.log('종료')
       clearInterval(interval.current)
     }
-  }, [imgCoord]);
+  }, [imgCoord]); // 배열에는 꼭 useEffect를 다시 실행할 값만 넣으세요.
 
   const changeHand = () => {
     if(imgCoord === rspCoords.바위) {
